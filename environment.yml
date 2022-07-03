@@ -7,10 +7,5 @@ dependencies:
   - pip
   - pip:
       - -r requirements.txt
-
       # environment tools
-      - flake8
-      - pep8-naming
-      - black
-      - isort
-      - mypy
+      - -r requirements-dev.txt
