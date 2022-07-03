@@ -22,17 +22,17 @@ class GADMDownloader:
     Official Website: https://gadm.org/
     """
 
-    __SUPPORTED_VERSIONS = {"3.6": "36", "4.0": "40"}
+    __SUPPORTED_VERSIONS = {"4.0": "40"}
     __ROOT_URL_TEMPLATE = "https://geodata.ucdavis.edu/gadm/gadm{version}/gpkg/"
     __DATA_PATH_TEMPLATE = "gadm{version_wo_dot}_{country_alpha_3}.gpkg"
-    __CACHED_DIR = os.path.join(os.path.expanduser("~"), "gadm")
+    __CACHED_DIR = os.path.join(os.path.expanduser("~"), ".gadm")
 
-    def __init__(self, version: str = "4.0", logger: logging.Logger = logging.getLogger("gamd_downloader.db")):
+    def __init__(self, version: str = "4.0", logger: logging.Logger = logging.getLogger("gadm_downloader.db")):
         """
         Parameters
         ----------
         version : str
-            version of gadm data, currently only support version 3.6 and 4.0
+            version of gadm data, currently only support version 4.0
         logger : logging.Logger
             logger instance
         """
@@ -47,9 +47,9 @@ class GADMDownloader:
             os.makedirs(GADMDownloader.__CACHED_DIR)
 
     def get_shape_data_by_country(
-        self, country: pct.ExistingCountries.data_class_base, ad_level
+        self, country: pct.ExistingCountries.data_class_base, ad_level: int
     ) -> Optional[gpd.GeoDataFrame]:
-        """get shape data as a GeoDataFrame by country name
+        """get shape data as a GeoDataFrame by country object
 
         Parameters
         ----------
@@ -68,15 +68,23 @@ class GADMDownloader:
             version_wo_dot=GADMDownloader.__SUPPORTED_VERSIONS[self._version], country_alpha_3=country.alpha_3
         )
         abs_data_path = os.path.join(GADMDownloader.__CACHED_DIR, data_path)
-        download_url(
-            self._url_root_dir + data_path,
-            abs_data_path,
-        )
+        try:
+            download_url(
+                self._url_root_dir + data_path,
+                abs_data_path,
+            )
+        except Exception as e:
+            self._logger.error(f"failed to fetch data for {country.common_name} with error {e}")
+            return None
+
         layers: List[str] = sorted(fiona.listlayers(abs_data_path))
+        if len(layers) < ad_level:
+            self._logger.info("gadm does not have data for level {ad_level} of {country.common_name}")
+            return None
 
         return gpd.read_file(abs_data_path, layer=layers[ad_level])
 
-    def get_shape_data(self, country_name: str, ad_level: int) -> Optional[gpd.GeoDataFrame]:
+    def get_shape_data_by_country_name(self, country_name: str, ad_level: int) -> Optional[gpd.GeoDataFrame]:
         """get shape data as a GeoDataFrame by country name
 
         Parameters

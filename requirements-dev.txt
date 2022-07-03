@@ -4,3 +4,6 @@ black
 isort
 mypy
 pytest
+pytest-cov
+pytest-black
+pytest-profiling
