@@ -1,0 +1,6 @@
+flake8
+pep8-naming
+black
+isort
+mypy
+pytest
