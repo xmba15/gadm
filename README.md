@@ -1,12 +1,12 @@
 # 📝 GADM  #
 ***
+This library provides all countries's national and preferectural boundaries in the form of [geopandas](https://geopandas.org/en/stable/) dataframe, by dynamically fetching from [GADM dataset](https://gadm.org/).
 
-## 🎛  Dependencies ##
+## :gear: Installation ##
 ***
 
 ```bash
-conda env create --file environment.yml
-conda activate gadm
+pip install gadm
 ```
 
 ## :running: How to Run ##
@@ -59,5 +59,10 @@ m
 
 ![folium map sample](./docs/images/sample_plot_on_folium_map.jpg)
 
-## :gem: References ##
+## 🎛  Development Environment ##
 ***
+
+```bash
+conda env create --file environment.yml
+conda activate gadm
+```
