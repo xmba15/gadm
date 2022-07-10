@@ -1,6 +1,8 @@
+[![PyPI version](https://badge.fury.io/py/gadm.svg)](https://badge.fury.io/py/gadm) [![Test](https://github.com/xmba15/gadm/actions/workflows/main.yml/badge.svg)](https://github.com/xmba15/gadm/actions/workflows/main.yml)
+
 # 📝 GADM  #
 ***
-This library provides all countries's national and preferectural boundaries in the form of [geopandas](https://geopandas.org/en/stable/) dataframe, by dynamically fetching from [GADM dataset](https://gadm.org/).
+This library provides all countries's national and prefectural boundaries in the form of [geopandas](https://geopandas.org/en/stable/) dataframe, by dynamically fetching from [GADM dataset](https://gadm.org/).
 
 ## :gear: Installation ##
 ***
