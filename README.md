@@ -1,4 +1,11 @@
-[![PyPI version](https://badge.fury.io/py/gadm.svg)](https://badge.fury.io/py/gadm) [![Test](https://github.com/xmba15/gadm/actions/workflows/main.yml/badge.svg)](https://github.com/xmba15/gadm/actions/workflows/main.yml)
+<p align="center">
+<a href="https://pypi.python.org/pypi/gadm" target="_blank">
+  <img src="https://img.shields.io/pypi/v/gadm.svg" alt="PyPi">
+</a>
+<a href="https://github.com/xmba15/gadm/actions/workflows/main.yml" target="_blank">
+  <img src="https://github.com/xmba15/gadm/actions/workflows/main.yml/badge.svg" alt="Build Status">
+</a>
+</p>
 
 # 📝 GADM  #
 ***
