@@ -63,6 +63,11 @@ m
   <img src="https://raw.githubusercontent.com/xmba15/gadm/master/docs/images/sample_plot_on_folium_map.jpg" alt="folium map sample">
 </p>
 
+### Download satellite images based on boundaries from gadm ###
+***
+
+Check [the following example](https://github.com/xmba15/gadm/blob/master/examples/download_satellite_images.py)
+
 ## 🎛  Development Environment ##
 ***
 
