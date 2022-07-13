@@ -1,5 +1,5 @@
 """
-Download satellite images of based on the boundary obtained gadm
+Download satellite images of based on the boundary obtained by gadm
 """
 import os
 import sys
