@@ -59,7 +59,9 @@ for _, r in gdf.iterrows():
 m
 ```
 
-![folium map sample](./docs/images/sample_plot_on_folium_map.jpg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/xmba15/gadm/master/docs/images/sample_plot_on_folium_map.jpg" alt="folium map sample">
+</p>
 
 ## 🎛  Development Environment ##
 ***
