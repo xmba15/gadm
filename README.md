@@ -2,6 +2,9 @@
 <a href="https://pypi.python.org/pypi/gadm" target="_blank">
   <img src="https://img.shields.io/pypi/v/gadm.svg" alt="PyPi">
 </a>
+<a href="https://pypi.python.org/pypi/gadm" target="_blank">
+  <img src="https://img.shields.io/pypi/pyversions/gadm" alt="PyPi">
+</a>
 <a href="https://github.com/xmba15/gadm/actions/workflows/main.yml" target="_blank">
   <img src="https://github.com/xmba15/gadm/actions/workflows/main.yml/badge.svg" alt="Build Status">
 </a>
