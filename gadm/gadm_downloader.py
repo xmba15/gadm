@@ -27,7 +27,12 @@ class GADMDownloader:
     __DATA_PATH_TEMPLATE = "gadm{version_wo_dot}_{country_alpha_3}.gpkg"
     __CACHED_DIR = os.path.join(os.path.expanduser("~"), ".gadm")
 
-    def __init__(self, version: str = "4.0", logger: logging.Logger = logging.getLogger("gadm_downloader.db")):
+    def __init__(
+        self,
+        version: str = "4.0",
+        timeout_sec: float = 60,
+        logger: logging.Logger = logging.getLogger("gadm_downloader.db"),
+    ):
         """
         Parameters
         ----------
@@ -41,6 +46,7 @@ class GADMDownloader:
         self._url_root_dir = GADMDownloader.__ROOT_URL_TEMPLATE.format(
             version=self._version,
         )
+        self._timeout_sec = timeout_sec
         self._logger = logger
 
         if not os.path.isdir(GADMDownloader.__CACHED_DIR):
@@ -64,6 +70,9 @@ class GADMDownloader:
             optional GeoDataFrame shape
         """
 
+        if not os.path.isdir(GADMDownloader.__CACHED_DIR):
+            os.makedirs(GADMDownloader.__CACHED_DIR)
+
         data_path = GADMDownloader.__DATA_PATH_TEMPLATE.format(
             version_wo_dot=GADMDownloader.__SUPPORTED_VERSIONS[self._version], country_alpha_3=country.alpha_3
         )
@@ -72,9 +81,11 @@ class GADMDownloader:
             download_url(
                 self._url_root_dir + data_path,
                 abs_data_path,
+                timeout_sec=self._timeout_sec,
+                logger=self._logger,
             )
         except Exception as e:
-            self._logger.error(f"failed to fetch data for {country.common_name} with error {e}")
+            self._logger.exception(f"failed to fetch data for {country.common_name} with error {e}")
             return None
 
         layers: List[str] = sorted(fiona.listlayers(abs_data_path))
@@ -104,7 +115,7 @@ class GADMDownloader:
         try:
             country = pct.countries.lookup(country_name)
         except LookupError:
-            self._logger.error(f"could not find data for {country_name}")
+            self._logger.exception(f"could not find data for {country_name}")
             return None
 
         return self.get_shape_data_by_country(country, ad_level)
